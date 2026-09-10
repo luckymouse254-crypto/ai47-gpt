@@ -1,0 +1,17 @@
+{
+  "name": "AI47 GPT - Your Creative AI Companion",
+  "short_name": "AI47 GPT",
+  "description": "Your Creative AI Companion - Free and open-source AI image generation studio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080a14",
+  "theme_color": "#0a0a14",
+  "icons": [
+    {
+      "src": "/assets/ai47-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

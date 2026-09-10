@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI47 GPT — Your Creative AI Companion</title>
+<link rel="icon" type="image/png" href="/assets/ai47-logo.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a14">
+<meta name="description" content="AI47 GPT - Your Creative AI Companion. Free and open-source AI image generation studio.">
+</head>
+<body>
+<div id="loadingScreen" class="loading-screen">
+  <img src="/assets/ai47-logo.png" alt="AI47 GPT" class="loading-logo pulse">
+  <h2>AI47 GPT</h2>
+  <p>Your Creative AI Companion</p>
+  <div class="loading-bar"><div class="loading-progress"></div></div>
+</div>
+
+<div class="app" id="app">
+  <!-- LEFT SIDEBAR DESKTOP -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="logo-area">
+        <img src="/assets/ai47-logo.png" alt="AI47 GPT" class="logo-img">
+        <div class="logo-text">
+          <h1>AI47 GPT</h1>
+          <span>Your Creative AI Companion</span>
+        </div>
+      </div>
+      <button class="collapse-btn" id="collapseBtn">‹</button>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-page="home">🏠 <span>Home</span></button>
+      <button class="nav-item" data-page="generator">🖼️ <span>Image Generator</span></button>
+      <button class="nav-item" data-page="editor">✏️ <span>Image Editor</span></button>
+      <button class="nav-item" data-page="variations">🔄 <span>Variations</span></button>
+      <button class="nav-item" data-page="gallery">🖼️ <span>My Gallery</span></button>
+      <button class="nav-item" data-page="chat">💬 <span>Chat</span></button>
+      <button class="nav-item" data-page="history">🕘 <span>History</span></button>
+      <div class="nav-divider"></div>
+      <button class="nav-item" data-page="opensource">⭐ <span>Open Source</span></button>
+      <button class="nav-item" data-page="settings">⚙️ <span>Settings</span></button>
+      <button class="nav-item" data-page="help">❓ <span>Help & Support</span></button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" id="themeToggle">🌙 <span>Dark Mode</span></button>
+      <div class="user-area">
+        <img src="/assets/ai47-logo.png" class="user-avatar">
+        <div><strong>AI47 GPT User</strong><small>Local Mode</small></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- TOP HEADER MOBILE -->
+    <header class="top-header">
+      <div class="header-left"><img src="/assets/ai47-logo.png" class="header-logo"><strong>AI47 GPT</strong></div>
+      <button class="menu-btn" id="mobileMenuBtn">☰</button>
+    </header>
+
+    <!-- STATUS BANNER -->
+    <div class="status-banner" id="statusBanner">
+      <span id="statusText">Checking AI provider...</span>
+      <button id="setupGuideBtn" class="link-btn">View Setup Guide</button>
+    </div>
+
+    <!-- PAGES -->
+    <!-- HOME -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <h2 class="hero-title">Create anything you can imagine.</h2>
+        <p class="hero-sub">Generate, edit and explore images with AI47 GPT. Free, open-source, self-hostable.</p>
+        <div class="hero-cta">
+          <button class="btn primary" data-goto="generator">Start Creating →</button>
+          <button class="btn ghost" data-goto="help">How it works</button>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card" data-goto="generator"><div class="f-icon">🖼️</div><h3>Text to Image</h3><p>Turn words into visuals</p></div>
+        <div class="feature-card" data-goto="editor"><div class="f-icon">✏️</div><h3>Image Editing</h3><p>Transform any image</p></div>
+        <div class="feature-card" data-goto="variations"><div class="f-icon">🔄</div><h3>Variations</h3><p>Explore new compositions</p></div>
+        <div class="feature-card" data-goto="generator"><div class="f-icon">🎨</div><h3>Style Controls</h3><p>15+ artistic styles</p></div>
+        <div class="feature-card" data-goto="editor"><div class="f-icon">📷</div><h3>Upload Image</h3><p>PNG, JPG, WEBP up to 10MB</p></div>
+        <div class="feature-card" data-goto="chat"><div class="f-icon">💬</div><h3>AI Chat</h3><p>Conversational creation</p></div>
+      </div>
+      <div class="info-box glass">
+        <h4>🔒 Honest Free Architecture</h4>
+        <p>AI47 GPT is <strong>free and open-source software</strong>. Image generation requires compute: run a local model (ComfyUI) on your own PC/server, or optionally connect a cloud provider. We never fake images.</p>
+      </div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section class="page" id="page-generator">
+      <div class="workspace">
+        <div class="workspace-left">
+          <div class="chat-history" id="chatHistory">
+            <div class="empty-state"><img src="/assets/ai47-logo.png" class="empty-logo"><h3>Describe your idea to create an image.</h3><p>Your creations will appear here.</p></div>
+          </div>
+          <div class="prompt-area">
+            <div class="prompt-enhance-row">
+              <label class="toggle"><input type="checkbox" id="enhanceToggle" checked><span>🪄 Prompt Enhancement</span></label>
+              <span class="enhance-preview" id="enhancePreview"></span>
+            </div>
+            <div class="prompt-input-wrap">
+              <textarea id="promptInput" placeholder="Create a futuristic city at night, cinematic wolf standing on a mountain..."></textarea>
+              <button class="btn primary send-btn" id="generateBtn">Generate ✨</button>
+            </div>
+          </div>
+        </div>
+        <div class="workspace-right" id="genControls">
+          <h3>Generation Controls</h3>
+          <div class="control-group"><label>Style</label><div class="style-grid" id="styleGrid"></div></div>
+          <div class="control-group"><label>Aspect Ratio</label><div class="ratio-grid" id="ratioGrid"></div></div>
+          <div class="control-group">
+            <details><summary>Advanced Settings</summary>
+              <label>Quality<select id="qualitySelect"><option>Standard</option><option selected>High</option></select></label>
+              <label>Images<select id="numImages"><option>1</option><option>2</option><option>4</option></select></label>
+              <label>Steps<input type="number" id="stepsInput" value="20" min="10" max="50"></label>
+              <label>Guidance<input type="number" id="guidanceInput" value="7" min="1" max="20" step="0.5"></label>
+              <label>Seed<input type="number" id="seedInput" placeholder="Random"></label>
+              <label>Negative Prompt<textarea id="negativeInput" placeholder="What should be avoided?"></textarea></label>
+            </details>
+          </div>
+          <div class="control-group"><label>Upload Reference</label><div class="upload-box" id="uploadBox"><span>📷 Drop or click</span><input type="file" id="imageUpload" accept=".png,.jpg,.jpeg,.webp" hidden></div><div id="uploadPreview"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDITOR -->
+    <section class="page" id="page-editor">
+      <div class="editor-layout">
+        <div class="upload-large" id="editorUploadBox"><div>📷 Upload Image to Edit</div><small>PNG, JPG, WEBP</small><input type="file" id="editorImage" accept=".png,.jpg,.jpeg,.webp" hidden></div>
+        <div id="editorPreviewArea"></div>
+        <div class="editor-controls">
+          <textarea id="editPrompt" placeholder="Change the background to a futuristic city..."></textarea>
+          <button class="btn primary" id="editBtn">Edit Image ✏️</button>
+        </div>
+        <div id="editResult"></div>
+      </div>
+    </section>
+
+    <!-- VARIATIONS -->
+    <section class="page" id="page-variations"><div class="page-header"><h2>Image Variations</h2><p>Select an image from gallery to create variations.</p></div><div class="gallery-grid" id="variationGrid"></div></section>
+
+    <!-- GALLERY -->
+    <section class="page" id="page-gallery"><div class="page-header"><h2>My Gallery</h2><div class="gallery-actions"><button class="btn ghost" id="clearGallery">Clear</button></div></div><div class="gallery-grid" id="galleryGrid"><div class="empty-state"><h3>No creations yet.</h3><p>Generated images will appear here. Stored locally in your browser.</p></div></div></section>
+
+    <!-- CHAT -->
+    <section class="page" id="page-chat">
+      <div class="chat-container"><div class="chat-messages" id="chatMessages"><div class="msg ai"><img src="/assets/ai47-logo.png" class="msg-avatar"><div class="msg-bubble">Hello! I'm AI47 GPT. Describe what you want to create. Try: "Create a cinematic wolf standing on a mountain."</div></div></div>
+      <div class="chat-input-row"><textarea id="chatInput" placeholder="Create a cinematic wolf..."></textarea><button class="btn primary" id="chatSend">Send</button></div></div>
+    </section>
+
+    <section class="page" id="page-history"><div class="page-header"><h2>Generation History</h2></div><div id="historyList"><div class="empty-state"><h3>No generation history yet.</h3></div></div></section>
+
+    <section class="page" id="page-opensource"><div class="page-header"><h2>⭐ Open Source Community</h2></div><div class="glass card"><p>AI47 GPT is MIT licensed. Free to fork, modify, self-host and share. No fake premium. This is community edition.</p><ul><li>Source: GitHub</li><li>Self-hostable</li><li>No vendor lock-in</li><li>Provider abstraction layer</li></ul></div></section>
+
+    <section class="page" id="page-settings">
+      <div class="page-header"><h2>Settings</h2></div>
+      <div class="settings-grid">
+        <div class="glass card"><h3>Provider Status</h3><div id="settingsStatus">Checking...</div></div>
+        <div class="glass card"><h3>Local Model</h3><p>Default: ComfyUI at <code id="comfyUrlDisplay">http://127.0.0.1:8188</code></p><p>Install ComfyUI + Stable Diffusion XL model to enable generation.</p></div>
+        <div class="glass card"><h3>PWA</h3><p>Interface can be installed as app, but image generation requires configured local model or AI provider.</p><button class="btn ghost" id="installPwaBtn">Install App</button></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-help">
+      <div class="page-header"><h2>Help & Support</h2></div>
+      <div class="help-content">
+        <div class="glass card"><h3>Why "Not configured"?</h3><p>AI47 GPT does <strong>NOT</strong> bundle a 5GB model inside the repo. That would be impossible for Vercel/GitHub. The honest flow:</p><ol><li>Code is free and open-source (what you deployed)</li><li>AI compute is separate: you install ComfyUI locally, or self-host it, or optionally add cloud provider.</li></ol><p>If you deploy to Vercel without a local model, it will correctly say: <em>"AI image generation is not configured yet."</em> It does NOT fake an image.</p></div>
+        <div class="glass card"><h3>How to enable generation locally</h3><pre>git clone https://github.com/yourname/AI47-GPT
+npm install
+# Install ComfyUI separately: https://github.com/comfyanonymous/ComfyUI
+# Download SDXL model to ComfyUI/models/checkpoints
+COMFYUI_URL=http://127.0.0.1:8188 npm start</pre></div>
+        <div class="glass card"><h3>Vercel deployment with free cloud</h3><p>For Vercel, you need a cloud inference endpoint (HF Inference API is free tier). Set in Vercel env: <code>OPTIONAL_CLOUD_PROVIDER=true</code> and implement cloudProvider.js with HF API key server-side only.</p></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- BOTTOM NAV MOBILE -->
+<nav class="bottom-nav" id="bottomNav">
+  <button data-page="home">🏠<small>Home</small></button>
+  <button data-page="generator">🖼️<small>Create</small></button>
+  <button data-page="gallery">🖼️<small>Gallery</small></button>
+  <button data-page="chat">💬<small>Chat</small></button>
+  <button data-page="settings">⚙️<small>Settings</small></button>
+</nav>
+
+<script src="/app.js"></script>
+</body>
+</html>
